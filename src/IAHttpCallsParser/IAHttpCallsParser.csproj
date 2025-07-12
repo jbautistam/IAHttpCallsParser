@@ -1,0 +1,128 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="Views\**" />
+    <Page Remove="Views\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\Accept.png" />
+    <None Remove="Resources\Images\Chatbot.png" />
+    <None Remove="Resources\Images\ChatBotAssistant.png" />
+    <None Remove="Resources\Images\ChatChoice.png" />
+    <None Remove="Resources\Images\ChatEmbedding.png" />
+    <None Remove="Resources\Images\ChatTool.png" />
+    <None Remove="Resources\Images\ChatUnknown.png" />
+    <None Remove="Resources\Images\ChatUser.png" />
+    <None Remove="Resources\Images\Connection.png" />
+    <None Remove="Resources\Images\Copy.png" />
+    <None Remove="Resources\Images\Culture.png" />
+    <None Remove="Resources\Images\Delete.png" />
+    <None Remove="Resources\Images\Dimension.png" />
+    <None Remove="Resources\Images\Excel.png" />
+    <None Remove="Resources\Images\Execute.png" />
+    <None Remove="Resources\Images\ExitApp.png" />
+    <None Remove="Resources\Images\Field.png" />
+    <None Remove="Resources\Images\Folder.png" />
+    <None Remove="Resources\Images\Import.png" />
+    <None Remove="Resources\Images\Module.png" />
+    <None Remove="Resources\Images\NewItem.png" />
+    <None Remove="Resources\Images\Page.png" />
+    <None Remove="Resources\Images\Paste.png" />
+    <None Remove="Resources\Images\Policy.png" />
+    <None Remove="Resources\Images\Properties.png" />
+    <None Remove="Resources\Images\Request.png" />
+    <None Remove="Resources\Images\RestCall.png" />
+    <None Remove="Resources\Images\Save.png" />
+    <None Remove="Resources\Images\saveas.png" />
+    <None Remove="Resources\Images\Search.png" />
+    <None Remove="Resources\Images\SearchNext.png" />
+    <None Remove="Resources\Images\SearchPrevious.png" />
+    <None Remove="Resources\Images\Section.png" />
+    <None Remove="Resources\Images\Table.png" />
+    <None Remove="Resources\Images\Template.png" />
+    <None Remove="Resources\Images\Trash.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\ChatBot.png" />
+    <Resource Include="Resources\Images\ChatBotAssistant.png" />
+    <Resource Include="Resources\Images\ChatChoice.png" />
+    <Resource Include="Resources\Images\ChatEmbedding.png" />
+    <Resource Include="Resources\Images\ChatTool.png" />
+    <Resource Include="Resources\Images\ChatUnknown.png" />
+    <Resource Include="Resources\Images\ChatUser.png" />
+    <Resource Include="Resources\Images\Module.png" />
+    <Resource Include="Resources\Images\Refresh.png" />
+    <Resource Include="Resources\Images\RestCall.png" />
+    <Resource Include="Resources\Images\SearchNext.png" />
+    <Resource Include="Resources\Images\SearchPrevious.png" />
+    <Resource Include="Resources\Images\Table.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bau.Libraries.LibHelper" Version="1.3.56" />
+    <PackageReference Include="BauMvvm.Views.Wpf" Version="1.3.11" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Controls\CodeEditor\src\CodeEditor.csproj" />
+    <ProjectReference Include="..\IAHttpCallsParser.ViewModels\IAHttpCallsParser.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Accept.png" />
+    <Resource Include="Resources\Images\Connection.png" />
+    <Resource Include="Resources\Images\Culture.png" />
+    <Resource Include="Resources\Images\Excel.png" />
+    <Resource Include="Resources\Images\Import.png" />
+    <Resource Include="Resources\Images\Dimension.png" />
+    <Resource Include="Resources\Images\Field.png" />
+    <Resource Include="Resources\Images\Policy.png" />
+    <Resource Include="Resources\Images\Execute.png" />
+    <Resource Include="Resources\Images\Page.png" />
+    <Resource Include="Resources\Images\File.png" />
+    <Resource Include="Resources\Images\Template.png" />
+    <Resource Include="Resources\Images\Copy.png" />
+    <Resource Include="Resources\Images\Delete.png" />
+    <Resource Include="Resources\Images\Request.png" />
+    <Resource Include="Resources\Images\ExitApp.png" />
+    <Resource Include="Resources\Images\Folder.png" />
+    <Resource Include="Resources\Images\NewItem.png" />
+    <Resource Include="Resources\Images\Paste.png" />
+    <Resource Include="Resources\Images\Properties.png" />
+    <Resource Include="Resources\Images\Save.png" />
+    <Resource Include="Resources\Images\SaveAs.png" />
+    <Resource Include="Resources\Images\Section.png" />
+    <Resource Include="Resources\Images\Trash.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
