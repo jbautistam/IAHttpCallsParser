@@ -48,7 +48,7 @@ public partial class App : System.Windows.Application
 	/// <summary>
 	///		Trata las excepciones no controladas de la aplicación
 	/// </summary>
-	private void TreatException(Exception exception)
+	private void TreatException(Exception? exception)
 	{
 		// Trata la excepción
 		try

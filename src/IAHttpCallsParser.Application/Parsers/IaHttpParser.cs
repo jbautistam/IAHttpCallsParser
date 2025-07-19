@@ -64,8 +64,7 @@ internal class IaHttpParser
 			{
 				if (!string.IsNullOrWhiteSpace(lines[index]))
 				{
-					if (lines[index].Trim().EndsWith("# Begin response", StringComparison.CurrentCultureIgnoreCase) ||
-						lines[index].Trim().EndsWith("# End response", StringComparison.CurrentCultureIgnoreCase))
+					if (lines[index].Trim().StartsWith("###", StringComparison.CurrentCultureIgnoreCase))
 					{
 						// Añade el contenido a una nueva sección
 						sections.Add(content);

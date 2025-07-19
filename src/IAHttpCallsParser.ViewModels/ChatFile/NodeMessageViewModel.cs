@@ -6,6 +6,7 @@ using IAHttpCallsParser.Application.Models.IaOutput.EmbeddingsResponse;
 using IAHttpCallsParser.Application.Models.IaOutput.Embeddings;
 using IAHttpCallsParser.Application.Models.IaOutput.ChatCompletionsResponse;
 using IAHttpCallsParser.Application.Models.IaOutput.ChatCompletions;
+using IAHttpCallsParser.Application.Models.IaOutput.Assistants;
 
 namespace IAHttpCallsParser.ViewModels.ChatFile;
 
@@ -200,6 +201,9 @@ public class NodeMessageViewModel : ControlHierarchicalViewModel
 			case EmbeddingResponseModel embeddingResponse:
 					LoadEmbeddingResponseNode(root, section.Message, embeddingResponse);
 				break;
+			case AssistantModel assistant:
+					LoadAssistantNode(root, section.Message, assistant);
+				break;
 			default:
 					LoadBodyNode(root, section.Message, section);	
 				break;
@@ -332,6 +336,22 @@ public class NodeMessageViewModel : ControlHierarchicalViewModel
 	}
 
 	/// <summary>
+	///		Carga el nodo de respuesta del asistente
+	/// </summary>
+	private void LoadAssistantNode(NodeMessageViewModel root, MessageModel message, AssistantModel assistant)
+	{
+		NodeMessageViewModel node = CreateNode(root, assistant.Description, NodeType.ChatBotAssistant, message);
+
+			// Asigna las propiedades
+			node.Header = assistant.Name;
+			node.Footer = assistant.Model;
+			// Añade los datos adicionales
+			CreateNode(node, assistant.Instructions, NodeType.ChatBotAssistant, message);
+			foreach (AssistantToolModel tool in assistant.Tools)
+				CreateNode(node, tool.Type, NodeType.ChatTool, message);
+	}
+
+	/// <summary>
 	///		Crea un nodo con el cuerpo de la sección
 	/// </summary>
 	private void LoadBodyNode(NodeMessageViewModel root, MessageModel message, MessageSectionModel section)
@@ -340,7 +360,12 @@ public class NodeMessageViewModel : ControlHierarchicalViewModel
 
 			// Ajusta el cuerpo
 			if (string.IsNullOrWhiteSpace(body))
-				body = "No server response";
+			{
+				if (section.IsRequest)
+					body = "Empty request body";
+				else
+					body = "No server response";
+			}
 			// Crea el nodo
 			CreateNode(root, body, NodeType.ChatUnknown, message);
 	}

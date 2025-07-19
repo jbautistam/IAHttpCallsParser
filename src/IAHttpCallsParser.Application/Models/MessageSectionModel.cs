@@ -42,6 +42,8 @@ public class MessageSectionModel(MessageModel message, string content, bool isRe
 						else
 							return ParseJson<IaOutput.EmbeddingsResponse.EmbeddingResponseModel>(body);
 					}
+					else if (page.EndsWith("/assistants", StringComparison.CurrentCultureIgnoreCase))
+						return ParseJson<IaOutput.Assistants.AssistantModel>(body);
 			}
 			catch (Exception exception)
 			{

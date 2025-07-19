@@ -135,7 +135,20 @@
 							<RowDefinition Height="Auto"/>
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
-						<Label Grid.Row="0" Grid.Column="0" Content="Request" Background="Green" Foreground="White" FontSize="14" Padding="5" Margin="0"/>
+						<Expander Grid.Row="0" Grid.Column="0" Margin="0" Header="Request" 
+								  Background="Green" Foreground="White" FontSize="14" Padding="5" 
+								  IsExpanded="False">
+							<ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=RequestHeaders}" MinHeight="120" MaxHeight="120">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<StackPanel Orientation="Horizontal">
+											<TextBlock Text="{Binding Path=Key}" FontWeight="Bold" Margin="5" />
+											<TextBlock Text="{Binding Path=Value}" Margin="5" TextWrapping="Wrap" />
+										</StackPanel>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</Expander>
 						<CodeEditor:ctlEditor x:Name="udtRequest" Grid.Row="1" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1" ReadOnly="True"/>
 					</Grid>
 					<GridSplitter Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
@@ -145,7 +158,20 @@
 							<RowDefinition Height="Auto"/>
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
-						<Label Grid.Row="0" Grid.Column="0" Content="Response" Background="Green" Foreground="White" FontSize="14" Padding="5" Margin="0"/>
+						<Expander Grid.Row="0" Grid.Column="0" Margin="0" Header="Response" 
+								  Background="Green" Foreground="White" FontSize="14" Padding="5" 
+								  IsExpanded="False">
+							<ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=ResponseHeaders}" MinHeight="120" MaxHeight="120">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<StackPanel Orientation="Horizontal">
+											<TextBlock Text="{Binding Path=Key}" FontWeight="Bold" Margin="5" />
+											<TextBlock Text="{Binding Path=Value}" Margin="5" TextWrapping="Wrap" />
+										</StackPanel>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</Expander>
 						<CodeEditor:ctlEditor x:Name="udtResponse" Grid.Row="1" Grid.Column="0" Margin="5" BorderBrush="Black" BorderThickness="1" ReadOnly="True"/>
 					</Grid>
 				</Grid>

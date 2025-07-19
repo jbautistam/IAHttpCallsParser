@@ -1,7 +1,9 @@
-﻿using Bau.Libraries.BauMvvm.ViewModels;
+﻿using Bau.Libraries.LibHelper.Extensors;
+using Bau.Libraries.BauMvvm.ViewModels;
 using Bau.Libraries.BauMvvm.ViewModels.Forms.ControlItems.ComboItems;
 using IAHttpCallsParser.Application;
 using IAHttpCallsParser.Application.Models;
+using System.Collections.ObjectModel;
 
 namespace IAHttpCallsParser.ViewModels;
 
@@ -16,6 +18,7 @@ public class IaParserViewModel : BaseObservableObject
     private string? _request, _response, _lastFile, _fileContent;
 	private ComboViewModel _comboFontSizes = default!;
 	private double _fontSizeText, _fontSizeHeader;
+	private ObservableCollection<Headers.HeaderViewModel> _requestHeaders = default!, _responseHeaders = default!;
 
 	public IaParserViewModel(Interfaces.IIAHttpCallsParserController iaHttpCallsParserController)
 	{
@@ -164,18 +167,32 @@ public class IaParserViewModel : BaseObservableObject
 						FileContent = Bau.Libraries.LibHelper.Files.HelperFiles.LoadTextFile(LastFile);
 					}
 				}
+				// Vacía los datos
+				Request = string.Empty;
+				RequestHeaders = new ObservableCollection<Headers.HeaderViewModel>();
+				Response = string.Empty;
+				ResponseHeaders = new ObservableCollection<Headers.HeaderViewModel>();
 				// Guarda los datos del mensaje
-				if (selectedMessage is null)
-				{
-					Request = string.Empty;
-					Response = string.Empty;
-				}
-				else
+				if (selectedMessage is not null)
 				{
 					Request = selectedMessage.Request.Body;
+					RequestHeaders = GetHeaders(selectedMessage.Request.Headers);
 					Response = selectedMessage.Response.Body;
+					ResponseHeaders = GetHeaders(selectedMessage.Response.Headers);
 				}
         }
+
+		// Obtiene el viewModel de las cabeceras
+		ObservableCollection<Headers.HeaderViewModel> GetHeaders(List<(string key, string? value)> headers)
+		{
+			ObservableCollection<Headers.HeaderViewModel> result = [];
+
+				// Añade las cabeceras a la cadena
+				foreach ((string key, string? value) in headers)
+					result.Add(new Headers.HeaderViewModel(key, value));
+				// Devuelve la cadena
+				return result;
+		}
 	}
 
 	/// <summary>
@@ -214,6 +231,15 @@ public class IaParserViewModel : BaseObservableObject
         set { CheckProperty(ref _request, value); }
     }
 
+	/// <summary>
+	///		Cabeceras de solicitud
+	/// </summary>
+	public ObservableCollection<Headers.HeaderViewModel> RequestHeaders
+	{
+		get { return _requestHeaders; }
+		set { CheckObject(ref _requestHeaders!, value); }
+	}
+
     /// <summary>
     ///     Texto con el cuerpo de la respuesta
     /// </summary>
@@ -222,6 +248,15 @@ public class IaParserViewModel : BaseObservableObject
         get { return _response; }
         set { CheckProperty(ref _response, value); }
     }
+
+	/// <summary>
+	///		Cabeceras de respuesta
+	/// </summary>
+	public ObservableCollection<Headers.HeaderViewModel> ResponseHeaders
+	{
+		get { return _responseHeaders; }
+		set { CheckObject(ref _responseHeaders!, value); }
+	}
 
 	/// <summary>
 	///		Ultimo archivo cargado
